@@ -1,9 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 import { getGames } from "../api/free-games.api";
-await getGames({ category: "shooter", "sort-by": "relevance" });
+const games = await getGames({ "sort-by": "relevance" });
 ---
 
 <Layout title="Welcome to Astro.">
-  <main></main>
+  <main>
+    <section
+      class="grid justify-items-center gap-y-12 my-20 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1"
+    >
+      {games.map((game) => <Card data={game} />)}
+    </section>
+  </main>
 </Layout>

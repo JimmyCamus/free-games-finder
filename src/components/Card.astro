@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import type { ManyGamesResponse } from "../lib/interfaces/games";
+
+const data = Astro.props.data as ManyGamesResponse;
+---
+
+<article
+  class="w-64 h-80 text-white bg-slate-950 rounded-md shadow-lg transition-all duration-150 hover:drop-shadow-glow hover:scale-105"
+>
+  <a href={data.freetogame_profile_url}>
+    <div class="grid grid-rows-auto h-full">
+      <header>
+        <Image
+          class="size-fit rounded-t-md"
+          src={data.thumbnail}
+          alt={data.short_description}
+          width="280"
+          height="280"
+          loading="lazy"
+          format="webp"
+          quality="mid"
+        />
+      </header>
+      <div class="grid gap-y-4 px-3">
+        <h3 class="text-xl font-bold">
+          {data.title}
+        </h3>
+        <section class="grid">
+          <p>By: {data.developer}</p>
+        </section>
+        <footer class="self-end pb-2">
+          <p class="bg-slate-900 w-fit p-2 rounded-3xl text-sm">{data.genre}</p>
+        </footer>
+      </div>
+    </div>
+  </a>
+</article>
