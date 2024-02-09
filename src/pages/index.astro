@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getGames } from "../api/free-games.api";
+await getGames({ category: "shooter", "sort-by": "relevance" });
 ---
 
 <Layout title="Welcome to Astro.">
