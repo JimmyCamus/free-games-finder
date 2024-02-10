@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import type { ManyGamesResponse } from "../lib/interfaces/games";
 
 const data = Astro.props.data as ManyGamesResponse;
@@ -8,18 +8,17 @@ const data = Astro.props.data as ManyGamesResponse;
 <article
   class="w-64 h-80 text-white bg-slate-950 rounded-md shadow-lg transition-all duration-150 hover:drop-shadow-glow hover:scale-105"
 >
-  <a href={data.freetogame_profile_url}>
+  <a href={`games/${data.id}`}>
     <div class="grid grid-rows-auto h-full">
       <header>
-        <Image
+        <Picture
           class="size-fit rounded-t-md"
           src={data.thumbnail}
           alt={data.short_description}
           width="280"
           height="280"
           loading="lazy"
-          format="webp"
-          quality="mid"
+          pictureAttributes={{ style: "background-color: red;" }}
         />
       </header>
       <div class="grid gap-y-4 px-3">

@@ -1,0 +1,123 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import type { OneGameResponse } from "../../lib/interfaces/games";
+import { getGame } from "../../api/free-games.api";
+import { Image } from "astro:assets";
+import Section from "../../components/Section.astro";
+import GameInformation from "../../components/Information.astro";
+
+const { id } = Astro.params;
+
+let data: OneGameResponse | undefined;
+
+if (id) {
+  data = await getGame(id);
+}
+---
+
+{
+  data ? (
+    <Layout title={data.title}>
+      <div class="text-white py-28">
+        <div class="fixed top-14 left-32 text-4xl">
+          <a href="/">←</a>
+        </div>
+        <div class="flex flex-row justify-evenly">
+          <header class="flex flex-col justify-center items-center gap-y-16 h-full">
+            <div class="w-[300px] h-[125px]">
+              <Image
+                class="size-fit rounded-t-md"
+                src={data.thumbnail}
+                alt={data.short_description}
+                width="400"
+                height="400"
+                loading="lazy"
+                format="webp"
+                quality="max"
+              />
+            </div>
+            <a
+              class="flex items-center justify-center w-32 h-8 text-lg bg-slate-800 rounded-md transition-all duration-150 hover:bg-slate-700"
+              href={data.game_url}
+              target="_blank"
+            >
+              PLAY NOW
+            </a>
+          </header>
+          <section class="flex flex-col items-center w-3/5">
+            <header>
+              <h1 class="text-5xl font-bold mb-7">
+                {data.title}
+                <span
+                  class={`${data.status === "Live" ? "text-green-600" : "text-red-500"}`}
+                >
+                  &bull;
+                </span>
+              </h1>
+            </header>
+            <main>
+              <section class="flex flex-row justify-between mt-5">
+                {data.screenshots.slice(0, 3).map((screenShot) => (
+                  <div class="w-[250px] h-[150px]">
+                    <Image
+                      class="object-cover rounded-sm"
+                      src={screenShot.image}
+                      alt={`screen shot of the game`}
+                      width="250"
+                      height="100"
+                    />
+                  </div>
+                ))}
+              </section>
+              <div class="w-full h-[2px] opacity-20 my-4 bg-white" />
+              <Section title={`About ${data.title}`}>
+                <p class="text-md text-pretty">{data.description}</p>
+              </Section>
+              <div class="w-full h-[2px] opacity-20 my-4 bg-white" />
+              <Section title="Additional Information">
+                <div class="h-44 grid grid-cols-3 place-items-center justify-items-start gap-y-3">
+                  <GameInformation title="Title" value={data.title} />
+                  <GameInformation title="Developer" value={data.developer} />
+                  <GameInformation title="Publisher" value={data.publisher} />
+                  <GameInformation
+                    title="Release date"
+                    value={data.release_date}
+                  />
+                  <GameInformation title="Genre" value={data.genre} />
+                  <GameInformation title="Platform" value={data.platform} />
+                </div>
+              </Section>
+              <div class="w-full h-[2px] opacity-20 my-4 bg-white" />
+              <Section title="Minimum System Requirements">
+                <div class="h-44 grid grid-cols-2 justify-items-start gap-y-5 gap-x-20">
+                  <GameInformation
+                    title="Graphics"
+                    value={data.minimum_system_requirements.graphics}
+                  />
+                  <GameInformation
+                    title="Processor"
+                    value={data.minimum_system_requirements.processor}
+                  />
+                  <GameInformation
+                    title="Memory"
+                    value={data.minimum_system_requirements.memory}
+                  />
+                  <GameInformation
+                    title="Storage"
+                    value={data.minimum_system_requirements.storage}
+                  />
+                  <GameInformation
+                    title="OS"
+                    value={data.minimum_system_requirements.os}
+                  />
+                </div>
+              </Section>
+            </main>
+          </section>
+        </div>
+      </div>
+    </Layout>
+  ) : (
+    <div />
+  )
+}

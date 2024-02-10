@@ -1,5 +1,5 @@
 export interface OneGameResponse {
-  id: number;
+  id: string;
   title: string;
   thumbnail: string;
   status: string;
