@@ -36,7 +36,9 @@ export const getGames = async (
   return data;
 };
 
-export const getGame = async (id: string): Promise<OneGameResponse> => {
+export const getGame = async (
+  id: string
+): Promise<OneGameResponse | undefined> => {
   const url = `${API_URL}?id=${id}`;
 
   let data: OneGameResponse;
@@ -44,9 +46,12 @@ export const getGame = async (id: string): Promise<OneGameResponse> => {
   try {
     const response = await fetch(url);
     data = await response.json();
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
     console.error("Error:", error);
-    throw error;
+    return;
   }
 
   return data;

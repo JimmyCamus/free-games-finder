@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import GameNotFound from "../../components/GameNotFound.astro";
 import type { OneGameResponse } from "../../lib/interfaces/games";
 import { getGame } from "../../api/free-games.api";
 import { Image } from "astro:assets";
@@ -118,6 +119,6 @@ if (id) {
       </div>
     </Layout>
   ) : (
-    <div />
+    <GameNotFound />
   )
 }
