@@ -5,6 +5,7 @@ import type { OneGameResponse } from "../../lib/interfaces/games";
 import { getGame } from "../../api/free-games.api";
 import Section from "../../components/Section.astro";
 import GameInformation from "../../components/Information.astro";
+import { Image } from "astro:assets";
 
 const { id } = Astro.params;
 
@@ -25,7 +26,7 @@ if (id) {
         <div class="flex  items-center flex-col desktop-mid:flex-row desktop-mid:justify-between desktop-mid:items-start desktop-high:justify-evenly">
           <header class="flex flex-col justify-center items-center gap-y-16 h-full">
             <div class="w-[250px] h-[100px]  desktop-mid:w-[300px] desktop-mid:h-[125px]">
-              <img
+              <Image
                 class="size-fit rounded-t-md"
                 src={data.thumbnail}
                 alt={data.short_description}
@@ -57,7 +58,7 @@ if (id) {
               <section class="flex flex-col justify-center items-center mt-4  desktop-mid:justify-between desktop-mid:items-start desktop-mid:flex-row">
                 {data.screenshots.slice(0, 3).map((screenShot) => (
                   <div class="w-[250px] h-[150px]">
-                    <img
+                    <Image
                       class="object-cover rounded-sm desktop-mid:w-[240px] desktop-high:w-[250px]"
                       src={screenShot.image}
                       alt={`screen shot of the game`}
