@@ -2,11 +2,46 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import { getGames } from "../api/free-games.api";
-const games = await getGames({ "sort-by": "relevance" });
+import { QueryParams } from "../lib/constants/query-params.constants";
+import Filter from "../components/Filter.astro";
+
+const category = Astro.url.searchParams.get(QueryParams.CATEGORY);
+const sortBy = Astro.url.searchParams.get(QueryParams.SORTBY);
+const tag = Astro.url.searchParams.get(QueryParams.TAG);
+
+const games = await getGames({
+  "sort-by": sortBy ?? "relevance",
+  category,
+  tag,
+});
+
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+  const category = data.get(QueryParams.CATEGORY);
+  const sortBy = data.get(QueryParams.SORTBY);
+
+  const querySegments: string[] = [];
+
+  if (typeof category === "string" && category !== "") {
+    querySegments.push(`category=${category}`);
+  }
+
+  if (typeof sortBy === "string") {
+    querySegments.push(`sort-by=${sortBy}`);
+  }
+
+  return Astro.redirect(`/?${querySegments.join("&")}`);
+}
 ---
 
 <Layout title="Free Games Finder">
+  <header class="text-8xl text-center mt-8 text-white font-bold">
+    <h1>Free Games Finder</h1>
+  </header>
   <main>
+    <section class="grid justify-items-center my-20 text-white">
+      <Filter />
+    </section>
     <section
       class="grid justify-items-center gap-y-12 my-20 grid-cols-1 desktop-high:grid-cols-4 desktop-mid:grid-cols-3"
     >

@@ -1,16 +1,15 @@
 import { API_URL } from "../lib/constants/api.constants";
+import type { QueryParams } from "../lib/constants/query-params.constants";
 import type {
   ManyGamesResponse,
   OneGameResponse,
 } from "../lib/interfaces/games";
 
 type GameSearch = {
-  category?: string;
-  "sort-by"?: string;
-  tag?: string;
+  [QueryParams.CATEGORY]?: string | null;
+  [QueryParams.SORTBY]?: string | null;
+  [QueryParams.TAG]?: string | null;
 };
-
-type GameSearchParams = "category" | "sort-by" | "tag";
 
 export const getGames = async (
   params: GameSearch = {}
@@ -18,7 +17,9 @@ export const getGames = async (
   const querySegments: string[] = [];
 
   for (let param in params) {
-    querySegments.push(`${param}=${params[param as GameSearchParams]}`);
+    const value = params[param as QueryParams];
+    if (!value) continue;
+    querySegments.push(`${param}=${value}`);
   }
 
   const url = `${API_URL}s?platform=pc&${querySegments.join("&")}`;
