@@ -93,23 +93,29 @@ if (id) {
                 <div class=" grid justify-items-start gap-y-5 desktop-mid:gap-x-20 desktop-mid:grid-cols-2 desktop-mid:h-44">
                   <GameInformation
                     title="Graphics"
-                    value={data.minimum_system_requirements.graphics}
+                    value={
+                      data.minimum_system_requirements.graphics ?? "Unknown"
+                    }
                   />
                   <GameInformation
                     title="Processor"
-                    value={data.minimum_system_requirements.processor}
+                    value={
+                      data.minimum_system_requirements.processor ?? "Unknown"
+                    }
                   />
                   <GameInformation
                     title="Memory"
-                    value={data.minimum_system_requirements.memory}
+                    value={data.minimum_system_requirements.memory ?? "Unknown"}
                   />
                   <GameInformation
                     title="Storage"
-                    value={data.minimum_system_requirements.storage}
+                    value={
+                      data.minimum_system_requirements.storage ?? "Unknown"
+                    }
                   />
                   <GameInformation
                     title="OS"
-                    value={data.minimum_system_requirements.os}
+                    value={data.minimum_system_requirements.os ?? "Unknown"}
                   />
                 </div>
               </Section>
