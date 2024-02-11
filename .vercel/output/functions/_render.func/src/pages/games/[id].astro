@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import GameNotFound from "../../components/GameNotFound.astro";
 import type { OneGameResponse } from "../../lib/interfaces/games";
 import { getGame } from "../../api/free-games.api";
 import { Image } from "astro:assets";
@@ -19,12 +20,12 @@ if (id) {
   data ? (
     <Layout title={data.title}>
       <div class="text-white py-28">
-        <div class="fixed top-14 left-32 text-4xl">
+        <div class="absolute top-1 text-4xl desktop-mid:fixed desktop-mid:top-14 desktop-mid:left-32 ">
           <a href="/">←</a>
         </div>
-        <div class="flex flex-row justify-evenly">
+        <div class="flex  items-center flex-col desktop-mid:flex-row desktop-mid:justify-between desktop-mid:items-start desktop-high:justify-evenly">
           <header class="flex flex-col justify-center items-center gap-y-16 h-full">
-            <div class="w-[300px] h-[125px]">
+            <div class="w-[250px] h-[100px]  desktop-mid:w-[300px] desktop-mid:h-[125px]">
               <Image
                 class="size-fit rounded-t-md"
                 src={data.thumbnail}
@@ -44,23 +45,23 @@ if (id) {
               PLAY NOW
             </a>
           </header>
-          <section class="flex flex-col items-center w-3/5">
+          <section class="flex flex-col items-center justify-center  mt-5 desktop-mid:mt-0 desktop-mid:w-1/2 desktop-high:w-3/5">
             <header>
-              <h1 class="text-5xl font-bold mb-7">
+              <h1 class="text-4xl text-center font-bold mb-7 desktop-mid:text-5xl desktop-mid:text-start">
                 {data.title}
                 <span
-                  class={`${data.status === "Live" ? "text-green-600" : "text-red-500"}`}
+                  class={`${data.status === "Live" ? "text-green-600" : "text-red-500"} text-2xl text-center`}
                 >
                   &bull;
                 </span>
               </h1>
             </header>
             <main>
-              <section class="flex flex-row justify-between mt-5">
+              <section class="flex flex-col justify-center items-center mt-4  desktop-mid:justify-between desktop-mid:items-start desktop-mid:flex-row">
                 {data.screenshots.slice(0, 3).map((screenShot) => (
                   <div class="w-[250px] h-[150px]">
                     <Image
-                      class="object-cover rounded-sm"
+                      class="object-cover rounded-sm desktop-mid:w-[240px] desktop-high:w-[250px]"
                       src={screenShot.image}
                       alt={`screen shot of the game`}
                       width="250"
@@ -75,7 +76,7 @@ if (id) {
               </Section>
               <div class="w-full h-[2px] opacity-20 my-4 bg-white" />
               <Section title="Additional Information">
-                <div class="h-44 grid grid-cols-3 place-items-center justify-items-start gap-y-3">
+                <div class="grid  place-items-center justify-items-start gap-y-3 desktop-mid:h-44 desktop-mid:grid-cols-3">
                   <GameInformation title="Title" value={data.title} />
                   <GameInformation title="Developer" value={data.developer} />
                   <GameInformation title="Publisher" value={data.publisher} />
@@ -89,26 +90,32 @@ if (id) {
               </Section>
               <div class="w-full h-[2px] opacity-20 my-4 bg-white" />
               <Section title="Minimum System Requirements">
-                <div class="h-44 grid grid-cols-2 justify-items-start gap-y-5 gap-x-20">
+                <div class=" grid justify-items-start gap-y-5 desktop-mid:gap-x-20 desktop-mid:grid-cols-2 desktop-mid:h-44">
                   <GameInformation
                     title="Graphics"
-                    value={data.minimum_system_requirements.graphics}
+                    value={
+                      data.minimum_system_requirements.graphics ?? "Unknown"
+                    }
                   />
                   <GameInformation
                     title="Processor"
-                    value={data.minimum_system_requirements.processor}
+                    value={
+                      data.minimum_system_requirements.processor ?? "Unknown"
+                    }
                   />
                   <GameInformation
                     title="Memory"
-                    value={data.minimum_system_requirements.memory}
+                    value={data.minimum_system_requirements.memory ?? "Unknown"}
                   />
                   <GameInformation
                     title="Storage"
-                    value={data.minimum_system_requirements.storage}
+                    value={
+                      data.minimum_system_requirements.storage ?? "Unknown"
+                    }
                   />
                   <GameInformation
                     title="OS"
-                    value={data.minimum_system_requirements.os}
+                    value={data.minimum_system_requirements.os ?? "Unknown"}
                   />
                 </div>
               </Section>
@@ -118,6 +125,6 @@ if (id) {
       </div>
     </Layout>
   ) : (
-    <div />
+    <GameNotFound />
   )
 }

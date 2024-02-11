@@ -80,9 +80,9 @@ async function getImage$1(options, imageConfig) {
   };
 }
 
-const $$Astro$6 = createAstro();
+const $$Astro$7 = createAstro();
 const $$Image = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$6, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$7, $$props, $$slots);
   Astro2.self = $$Image;
   const props = Astro2.props;
   if (props.alt === void 0 || props.alt === null) {
@@ -102,9 +102,9 @@ const $$Image = createComponent(async ($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<img${addAttribute(image.src, "src")}${spreadAttributes(additionalAttributes)}${spreadAttributes(image.attributes)}>`;
 }, "C:/Users/Jeremy Camus/workspace/astro/free-games-finder/node_modules/.pnpm/astro@4.3.5_typescript@5.3.3/node_modules/astro/components/Image.astro", void 0);
 
-const $$Astro$5 = createAstro();
+const $$Astro$6 = createAstro();
 const $$Picture = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$5, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$6, $$props, $$slots);
   Astro2.self = $$Picture;
   const defaultFormats = ["webp"];
   const defaultFallbackFormat = "png";
@@ -146,28 +146,38 @@ const imageConfig = {"service":{"entrypoint":"astro/assets/services/sharp","conf
 					new URL("file:///C:/Users/Jeremy%20Camus/workspace/astro/free-games-finder/.vercel/output/static/");
 					const getImage = async (options) => await getImage$1(options, imageConfig);
 
-const $$Astro$4 = createAstro();
+const $$Astro$5 = createAstro();
 const $$ViewTransitions = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$4, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$5, $$props, $$slots);
   Astro2.self = $$ViewTransitions;
   const { fallback = "animate" } = Astro2.props;
   return renderTemplate`<meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback"${addAttribute(fallback, "content")}>`;
 }, "C:/Users/Jeremy Camus/workspace/astro/free-games-finder/node_modules/.pnpm/astro@4.3.5_typescript@5.3.3/node_modules/astro/components/ViewTransitions.astro", void 0);
 
-const $$Astro$3 = createAstro();
+const $$Astro$4 = createAstro();
 const $$Layout = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$3, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$4, $$props, $$slots);
   Astro2.self = $$Layout;
   const { title } = Astro2.props;
   return renderTemplate`<html lang="en"> <head>${renderComponent($$result, "ViewTransitions", $$ViewTransitions, {})}<meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator"${addAttribute(Astro2.generator, "content")}><title>${title}</title>${renderHead()}</head> <body class="flex justify-center"> <div class="fixed top-0 z-[-2] h-full w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div> <div class="w-3/4"> ${renderSlot($$result, $$slots["default"])} </div>  </body> </html>`;
 }, "C:/Users/Jeremy Camus/workspace/astro/free-games-finder/src/layouts/Layout.astro", void 0);
+
+const $$Astro$3 = createAstro();
+const $$GameNotFound = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$3, $$props, $$slots);
+  Astro2.self = $$GameNotFound;
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Game not found" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main class="grid justify-center content-center h-screen text-white gap-y-11"> <h1 class="text-7xl">Game not found 🫤</h1> <a class="text-center text-3xl hover:opacity-60" href="/">Click here to return to the main page</a> </main> ` })}`;
+}, "C:/Users/Jeremy Camus/workspace/astro/free-games-finder/src/components/GameNotFound.astro", void 0);
 
 const API_URL = await "https://www.freetogame.com/api/game";
 
 const getGames = async (params = {}) => {
   const querySegments = [];
   for (let param in params) {
-    querySegments.push(`${param}=${params[param]}`);
+    const value = params[param];
+    if (!value)
+      continue;
+    querySegments.push(`${param}=${value}`);
   }
   const url = `${API_URL}s?platform=pc&${querySegments.join("&")}`;
   let data;
@@ -186,9 +196,12 @@ const getGame = async (id) => {
   try {
     const response = await fetch(url);
     data = await response.json();
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
     console.error("Error:", error);
-    throw error;
+    return;
   }
   return data;
 };
@@ -218,11 +231,11 @@ const $$id = createComponent(async ($$result, $$props, $$slots) => {
   if (id) {
     data = await getGame(id);
   }
-  return renderTemplate`${data ? renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": data.title }, { "default": ($$result2) => renderTemplate`${maybeRenderHead()}<div class="text-white py-28"><div class="fixed top-14 left-32 text-4xl"><a href="/">←</a></div><div class="flex flex-row justify-evenly"><header class="flex flex-col justify-center items-center gap-y-16 h-full"><div class="w-[300px] h-[125px]">${renderComponent($$result2, "Image", $$Image, { "class": "size-fit rounded-t-md", "src": data.thumbnail, "alt": data.short_description, "width": "400", "height": "400", "loading": "lazy", "format": "webp", "quality": "max" })}</div><a class="flex items-center justify-center w-32 h-8 text-lg bg-slate-800 rounded-md transition-all duration-150 hover:bg-slate-700"${addAttribute(data.game_url, "href")} target="_blank">
+  return renderTemplate`${data ? renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": data.title }, { "default": ($$result2) => renderTemplate`${maybeRenderHead()}<div class="text-white py-28"><div class="absolute top-1 text-4xl desktop-mid:fixed desktop-mid:top-14 desktop-mid:left-32 "><a href="/">←</a></div><div class="flex  items-center flex-col desktop-mid:flex-row desktop-mid:justify-between desktop-mid:items-start desktop-high:justify-evenly"><header class="flex flex-col justify-center items-center gap-y-16 h-full"><div class="w-[250px] h-[100px]  desktop-mid:w-[300px] desktop-mid:h-[125px]">${renderComponent($$result2, "Image", $$Image, { "class": "size-fit rounded-t-md", "src": data.thumbnail, "alt": data.short_description, "width": "400", "height": "400", "loading": "lazy", "format": "webp", "quality": "max" })}</div><a class="flex items-center justify-center w-32 h-8 text-lg bg-slate-800 rounded-md transition-all duration-150 hover:bg-slate-700"${addAttribute(data.game_url, "href")} target="_blank">
 PLAY NOW
-</a></header><section class="flex flex-col items-center w-3/5"><header><h1 class="text-5xl font-bold mb-7">${data.title}<span${addAttribute(`${data.status === "Live" ? "text-green-600" : "text-red-500"}`, "class")}>
+</a></header><section class="flex flex-col items-center justify-center  mt-5 desktop-mid:mt-0 desktop-mid:w-1/2 desktop-high:w-3/5"><header><h1 class="text-4xl text-center font-bold mb-7 desktop-mid:text-5xl desktop-mid:text-start">${data.title}<span${addAttribute(`${data.status === "Live" ? "text-green-600" : "text-red-500"} text-2xl text-center`, "class")}>
 &bull;
-</span></h1></header><main><section class="flex flex-row justify-between mt-5">${data.screenshots.slice(0, 3).map((screenShot) => renderTemplate`<div class="w-[250px] h-[150px]">${renderComponent($$result2, "Image", $$Image, { "class": "object-cover rounded-sm", "src": screenShot.image, "alt": `screen shot of the game`, "width": "250", "height": "100" })}</div>`)}</section><div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>${renderComponent($$result2, "Section", $$Section, { "title": `About ${data.title}` }, { "default": ($$result3) => renderTemplate`<p class="text-md text-pretty">${data.description}</p>` })}<div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>${renderComponent($$result2, "Section", $$Section, { "title": "Additional Information" }, { "default": ($$result3) => renderTemplate`<div class="h-44 grid grid-cols-3 place-items-center justify-items-start gap-y-3">${renderComponent($$result3, "GameInformation", $$Information, { "title": "Title", "value": data.title })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Developer", "value": data.developer })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Publisher", "value": data.publisher })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Release date", "value": data.release_date })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Genre", "value": data.genre })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Platform", "value": data.platform })}</div>` })}<div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>${renderComponent($$result2, "Section", $$Section, { "title": "Minimum System Requirements" }, { "default": ($$result3) => renderTemplate`<div class="h-44 grid grid-cols-2 justify-items-start gap-y-5 gap-x-20">${renderComponent($$result3, "GameInformation", $$Information, { "title": "Graphics", "value": data.minimum_system_requirements.graphics })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Processor", "value": data.minimum_system_requirements.processor })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Memory", "value": data.minimum_system_requirements.memory })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Storage", "value": data.minimum_system_requirements.storage })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "OS", "value": data.minimum_system_requirements.os })}</div>` })}</main></section></div></div>` })}` : renderTemplate`<div></div>`}`;
+</span></h1></header><main><section class="flex flex-col justify-center items-center mt-4  desktop-mid:justify-between desktop-mid:items-start desktop-mid:flex-row">${data.screenshots.slice(0, 3).map((screenShot) => renderTemplate`<div class="w-[250px] h-[150px]">${renderComponent($$result2, "Image", $$Image, { "class": "object-cover rounded-sm desktop-mid:w-[240px] desktop-high:w-[250px]", "src": screenShot.image, "alt": `screen shot of the game`, "width": "250", "height": "100" })}</div>`)}</section><div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>${renderComponent($$result2, "Section", $$Section, { "title": `About ${data.title}` }, { "default": ($$result3) => renderTemplate`<p class="text-md text-pretty">${data.description}</p>` })}<div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>${renderComponent($$result2, "Section", $$Section, { "title": "Additional Information" }, { "default": ($$result3) => renderTemplate`<div class="grid  place-items-center justify-items-start gap-y-3 desktop-mid:h-44 desktop-mid:grid-cols-3">${renderComponent($$result3, "GameInformation", $$Information, { "title": "Title", "value": data.title })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Developer", "value": data.developer })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Publisher", "value": data.publisher })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Release date", "value": data.release_date })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Genre", "value": data.genre })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Platform", "value": data.platform })}</div>` })}<div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>${renderComponent($$result2, "Section", $$Section, { "title": "Minimum System Requirements" }, { "default": ($$result3) => renderTemplate`<div class=" grid justify-items-start gap-y-5 desktop-mid:gap-x-20 desktop-mid:grid-cols-2 desktop-mid:h-44">${renderComponent($$result3, "GameInformation", $$Information, { "title": "Graphics", "value": data.minimum_system_requirements.graphics ?? "Unknown" })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Processor", "value": data.minimum_system_requirements.processor ?? "Unknown" })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Memory", "value": data.minimum_system_requirements.memory ?? "Unknown" })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "Storage", "value": data.minimum_system_requirements.storage ?? "Unknown" })}${renderComponent($$result3, "GameInformation", $$Information, { "title": "OS", "value": data.minimum_system_requirements.os ?? "Unknown" })}</div>` })}</main></section></div></div>` })}` : renderTemplate`${renderComponent($$result, "GameNotFound", $$GameNotFound, {})}`}`;
 }, "C:/Users/Jeremy Camus/workspace/astro/free-games-finder/src/pages/games/[id].astro", void 0);
 
 const $$file = "C:/Users/Jeremy Camus/workspace/astro/free-games-finder/src/pages/games/[id].astro";
