@@ -1,0 +1,13 @@
+---
+const { name, label } = Astro.props;
+---
+
+<label class="flex flex-col items-center gap-x-4 desktop-mid:flex-row">
+  {label}
+  <select
+    name={name}
+    class="bg-slate-950 w-64 h-12 p-2 rounded-lg hover:cursor-pointer hover:text-gray-300"
+  >
+    <slot />
+  </select>
+</label>
