@@ -7,5 +7,7 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   integrations: [tailwind()],
   output: "server",
-  adapter: netlify()
+  adapter: netlify({
+    imageCDN: true,
+  }),
 });
