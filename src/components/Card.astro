@@ -11,15 +11,13 @@ const data = Astro.props.data as ManyGamesResponse;
   <a href={`games/${data.id}`}>
     <div class="grid grid-rows-auto h-full">
       <header>
-        <Image
+        <img
           class="size-fit rounded-t-md"
           src={data.thumbnail}
           alt={data.short_description}
           width="280"
           height="280"
           loading="lazy"
-          format="webp"
-          quality="low"
         />
       </header>
       <div class="grid gap-y-4 px-3">
