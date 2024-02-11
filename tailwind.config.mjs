@@ -9,6 +9,13 @@ export default {
       "desktop-high": "1500px",
     },
     extend: {
+      colors: {
+        base: "#1A1A1A",
+        dark: "#1E1E1E",
+        primary: "#FFFFFF",
+        secondary: "#666666",
+        accent: "#007BFF",
+      },
       dropShadow: {
         glow: [
           "0 0px 20px rgba(200,200, 200, 0.25) ",
