@@ -2,8 +2,11 @@
 import { QueryParams } from "../lib/constants/query-params.constants";
 ---
 
-<form method="post" class="flex flex-row gap-x-28 justify-center w-full">
-  <label class="flex flex-row items-center gap-x-4">
+<form
+  method="post"
+  class="flex flex-col gap-x-28 justify-center gap-y-5 w-full desktop-mid:flex-row desktop-mid:gap-y-0"
+>
+  <label class="flex flex-col items-center gap-x-4 desktop-mid:flex-row">
     Categories:
     <select
       name={QueryParams.CATEGORY}
@@ -51,7 +54,7 @@ import { QueryParams } from "../lib/constants/query-params.constants";
       <option value="permadeath">Permadeath</option>
     </select>
   </label>
-  <label class="flex flex-row items-center gap-x-4">
+  <label class="flex flex-col items-center gap-x-4 desktop-mid:flex-row">
     Sort By:
     <select
       name={QueryParams.SORTBY}
