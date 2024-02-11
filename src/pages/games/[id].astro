@@ -3,7 +3,6 @@ import Layout from "../../layouts/Layout.astro";
 import GameNotFound from "../../components/GameNotFound.astro";
 import type { OneGameResponse } from "../../lib/interfaces/games";
 import { getGame } from "../../api/free-games.api";
-import { Image } from "astro:assets";
 import Section from "../../components/Section.astro";
 import GameInformation from "../../components/Information.astro";
 
@@ -26,15 +25,13 @@ if (id) {
         <div class="flex  items-center flex-col desktop-mid:flex-row desktop-mid:justify-between desktop-mid:items-start desktop-high:justify-evenly">
           <header class="flex flex-col justify-center items-center gap-y-16 h-full">
             <div class="w-[250px] h-[100px]  desktop-mid:w-[300px] desktop-mid:h-[125px]">
-              <Image
+              <img
                 class="size-fit rounded-t-md"
                 src={data.thumbnail}
                 alt={data.short_description}
                 width="400"
                 height="400"
                 loading="lazy"
-                format="webp"
-                quality="max"
               />
             </div>
             <a
@@ -60,7 +57,7 @@ if (id) {
               <section class="flex flex-col justify-center items-center mt-4  desktop-mid:justify-between desktop-mid:items-start desktop-mid:flex-row">
                 {data.screenshots.slice(0, 3).map((screenShot) => (
                   <div class="w-[250px] h-[150px]">
-                    <Image
+                    <img
                       class="object-cover rounded-sm desktop-mid:w-[240px] desktop-high:w-[250px]"
                       src={screenShot.image}
                       alt={`screen shot of the game`}

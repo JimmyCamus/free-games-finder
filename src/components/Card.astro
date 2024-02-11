@@ -1,5 +1,4 @@
 ---
-import { Picture } from "astro:assets";
 import type { ManyGamesResponse } from "../lib/interfaces/games";
 
 const data = Astro.props.data as ManyGamesResponse;
@@ -11,7 +10,7 @@ const data = Astro.props.data as ManyGamesResponse;
   <a href={`games/${data.id}`}>
     <div class="grid grid-rows-auto h-full">
       <header>
-        <Picture
+        <img
           class="size-fit rounded-t-md"
           src={data.thumbnail}
           alt={data.short_description}
