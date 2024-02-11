@@ -6,7 +6,7 @@ const data = Astro.props.data as ManyGamesResponse;
 ---
 
 <article
-  class="w-64 h-80 text-white bg-slate-950 rounded-md shadow-lg transition-all duration-150 hover:drop-shadow-glow hover:scale-105"
+  class="w-64 h-80 text-white bg-dark rounded-md shadow-lg transition-all duration-150 hover:drop-shadow-glow hover:scale-105"
 >
   <a href={`games/${data.id}`}>
     <div class="grid grid-rows-auto h-full">
@@ -30,7 +30,9 @@ const data = Astro.props.data as ManyGamesResponse;
           <p>By: {data.developer}</p>
         </section>
         <footer class="self-end pb-2">
-          <p class="bg-slate-900 w-fit p-2 rounded-3xl text-sm">{data.genre}</p>
+          <p class="border-2 border-secondary w-fit p-2 rounded-3xl text-sm">
+            {data.genre}
+          </p>
         </footer>
       </div>
     </div>
