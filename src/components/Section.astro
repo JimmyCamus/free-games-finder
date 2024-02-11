@@ -1,0 +1,9 @@
+---
+const { title, styles } = Astro.props;
+---
+
+<section class={`${styles}`}>
+  <h2 class="text-xl">{title}</h2>
+  <div class="w-full h-[2px] opacity-20 my-4 bg-white"></div>
+  <slot />
+</section>
