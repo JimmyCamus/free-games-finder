@@ -1,54 +1,49 @@
-# Astro Starter Kit: Basics
+# [FreeGamesFinder](https://main--free-games-finder.netlify.app/)
 
-```sh
-npm create astro@latest -- --template basics
-```
+Free Games Finder is a website dedicated to providing a comprehensive list of free PC games. Whether you're looking for exciting adventures, challenging strategy, or just something to pass the time, Free Games Finder has something for everyone.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![Captura de pantalla 2024-02-11 220433](https://github.com/JimmyCamus/free-games-finder/assets/86853554/aa963789-7801-425b-b8a4-af945c2069d8)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🛠️ Stack
 
-## 🚀 Project Structure
+- [Typescript](https://www.typescriptlang.org/): JavaScript with syntax for types.
+- [Astro](https://astro.build/): The web framework for content-driven websites.
+- [TailwindCSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.
 
-Inside of your Astro project, you'll see the following folders and files:
+This project is developed using [Astro](https://astro.build/), [TailwindCSS](https://tailwindcss.com/) and managed with [PNPM](https://pnpm.io/)
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 📃 Features
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- **Game Listing**: Explore a wide variety of free games available for PC.
+- **Detailed Information**: Get detailed information about each game, including its title, screenshot, description, and more.
+- **Easy Navigation**: Navigate through the list of games intuitively and easily.
+- **Search**: Use the search feature to find specific games according to your preferences.
+- **Constant Updates**: The list of games is regularly updated to include the latest additions and removals.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🚀 Getting Started
 
-Any static assets, like images, can be placed in the `public/` directory.
+1. Clone this repository to your local machine:
 
-## 🧞 Commands
+   ```bash
+   git@github.com:JimmyCamus/free-games-finder.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd free-games-finder
+   ```
+3. Install dependencies using PNPM:
+   ```bash
+    # Install pnpm globally if you don't have it:
+    npm install -g pnpm
 
-All commands are run from the root of the project, from a terminal:
+    # Install dependencies:
+    pnpm install
+   ```
+4. Start the development server:
+   ```bash
+   pnpm run dev
+   ```
+5. Open http://localhost:4321 with your browser to see the result.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Thank you for using Free Games Finder! I hope you find many exciting games to enjoy on your PC.
