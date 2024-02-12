@@ -11,8 +11,6 @@ Free Games Finder is a website dedicated to providing a comprehensive list of fr
 - [Astro](https://astro.build/): The web framework for content-driven websites.
 - [TailwindCSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.
 
-This project is developed using [Astro](https://astro.build/), [TailwindCSS](https://tailwindcss.com/) and managed with [PNPM](https://pnpm.io/)
-
 ## 📃 Features
 
 - **Game Listing**: Explore a wide variety of free games available for PC.
