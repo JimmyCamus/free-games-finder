@@ -40,10 +40,19 @@ if (Astro.request.method === "POST") {
   >
     <h1>Free Games Finder</h1>
   </header>
+
   <main>
     <section class="grid justify-items-center my-20 text-white">
       <Filter category={category} sortBy={sortBy} />
     </section>
-    <GameList client:visible games={games} />
+    {
+      games ? (
+        <GameList client:visible games={games} />
+      ) : (
+        <h2 class="text-4xl text-center text-primary mt-52">
+          No game has been found 🤷‍♂️
+        </h2>
+      )
+    }
   </main>
 </Layout>
