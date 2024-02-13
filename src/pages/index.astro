@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import { getGames } from "../api/free-games.api";
 import { QueryParams } from "../lib/constants/query-params.constants";
 import Filter from "../components/Filter.astro";
+import GameList from "../components/GameList";
 
 const category = Astro.url.searchParams.get(QueryParams.CATEGORY);
 const sortBy = Astro.url.searchParams.get(QueryParams.SORTBY);
@@ -40,14 +40,19 @@ if (Astro.request.method === "POST") {
   >
     <h1>Free Games Finder</h1>
   </header>
+
   <main>
     <section class="grid justify-items-center my-20 text-white">
-      <Filter />
+      <Filter category={category} sortBy={sortBy} />
     </section>
-    <section
-      class="grid justify-items-center gap-y-12 my-20 grid-cols-1 desktop-high:grid-cols-4 desktop-mid:grid-cols-3"
-    >
-      {games.map((game) => <Card data={game} />)}
-    </section>
+    {
+      games ? (
+        <GameList client:visible games={games} />
+      ) : (
+        <h2 class="text-4xl text-center text-primary mt-52">
+          No game has been found 🤷‍♂️
+        </h2>
+      )
+    }
   </main>
 </Layout>

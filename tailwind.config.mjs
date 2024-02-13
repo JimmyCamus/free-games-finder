@@ -14,7 +14,7 @@ export default {
         dark: "#1E1E1E",
         primary: "#FFFFFF",
         secondary: "#666666",
-        accent: "#007BFF",
+        accent: "#004C9E",
       },
       dropShadow: {
         glow: [
