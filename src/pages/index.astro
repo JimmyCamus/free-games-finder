@@ -42,7 +42,7 @@ if (Astro.request.method === "POST") {
   </header>
   <main>
     <section class="grid justify-items-center my-20 text-white">
-      <Filter />
+      <Filter category={category} sortBy={sortBy} />
     </section>
     <GameList client:visible games={games} />
   </main>

@@ -1,6 +1,58 @@
 ---
 import Select from "../components/Select.astro";
 import { QueryParams } from "../lib/constants/query-params.constants";
+
+const { category, sortBy } = Astro.props;
+
+const categoryOptions = [
+  { key: "", text: "Any" },
+  { key: "mmo", text: "MMO" },
+  { key: "mmorpg", text: "MMORPG" },
+  { key: "shooter", text: "Shooter" },
+  { key: "strategy", text: "Strategy" },
+  { key: "moba", text: "Moba" },
+  { key: "card", text: "Card Games" },
+  { key: "racing", text: "Racing" },
+  { key: "sports", text: "Sports" },
+  { key: "social", text: "Social" },
+  { key: "fighting", text: "Fighting" },
+  { key: "mmofps", text: "MMOFPS" },
+  { key: "action-rpg", text: "Action RPG" },
+  { key: "sandbox", text: "Sandbox" },
+  { key: "open-world", text: "Open World" },
+  { key: "survival", text: "Survival" },
+  { key: "battle-royale", text: "Battle Royale" },
+  { key: "mmotps", text: "MMOTPS" },
+  { key: "anime", text: "Anime" },
+  { key: "pvp", text: "PvP" },
+  { key: "pve", text: "PvE" },
+  { key: "pixel", text: "Pixel" },
+  { key: "mmorts", text: "MMORTS" },
+  { key: "fantasy", text: "Fantasy" },
+  { key: "sci-fi", text: "Sci-Fi" },
+  { key: "action", text: "Action" },
+  { key: "voxel", text: "Voxel" },
+  { key: "zombie", text: "Zombie" },
+  { key: "turn-based", text: "Turn-Based" },
+  { key: "first-person", text: "First Person View" },
+  { key: "third-Person", text: "Third Person View" },
+  { key: "top-down", text: "Top-Down View" },
+  { key: "3d", text: "3D Graphics" },
+  { key: "2d", text: "2D Graphics" },
+  { key: "tank", text: "Tank" },
+  { key: "space", text: "Space" },
+  { key: "sailing", text: "Sailing" },
+  { key: "side-scroller", text: "Side Scroller" },
+  { key: "superhero", text: "Superhero" },
+  { key: "permadeath", text: "Permadeath" },
+];
+
+const sortByOptions = [
+  { key: "relevance", text: "Relevance" },
+  { key: "popularity", text: "Popularity" },
+  { key: "release-date", text: "Release date" },
+  { key: "alphabetical", text: "Alphabetical" },
+];
 ---
 
 <form
@@ -8,52 +60,22 @@ import { QueryParams } from "../lib/constants/query-params.constants";
   class="flex flex-col gap-x-28 justify-center gap-y-5 w-full desktop-mid:flex-row desktop-mid:gap-y-0"
 >
   <Select name={QueryParams.CATEGORY} label="Category:">
-    <option value="">Any</option>
-    <option value="mmo">MMO</option>
-    <option value="mmorpg">MMORPG</option>
-    <option value="shooter">Shooter</option>
-    <option value="strategy">Strategy</option>
-    <option value="moba">Moba</option>
-    <option value="card">Card Games</option>
-    <option value="racing">Racing</option>
-    <option value="sports">Sports</option>
-    <option value="social">Social</option>
-    <option value="fighting">Fighting</option>
-    <option value="mmofps">MMOFPS</option>
-    <option value="action-rpg">Action RPG</option>
-    <option value="sandbox">Sandbox</option>
-    <option value="open-world">Open World</option>
-    <option value="survival">Survival</option>
-    <option value="battle-royale">Battle Royale</option>
-    <option value="mmotps">MMOTPS</option>
-    <option value="anime">Anime</option>
-    <option value="pvp">PvP</option>
-    <option value="pve">PvE</option>
-    <option value="pixel">Pixel</option>
-    <option value="mmorts">MMORTS</option>
-    <option value="fantasy">Fantasy</option>
-    <option value="sci-fi">Sci-Fi</option>
-    <option value="action">Action</option>
-    <option value="voxel">Voxel</option>
-    <option value="zombie">Zombie</option>
-    <option value="turn-based">Turn-Based</option>
-    <option value="first-person">First Person View</option>
-    <option value="third-Person">Third Person View</option>
-    <option value="top-down">Top-Down View</option>
-    <option value="3d">3D Graphics</option>
-    <option value="2d">2D Graphics</option>
-    <option value="tank">Tank</option>
-    <option value="space">Space</option>
-    <option value="sailing">Sailing</option>
-    <option value="side-scroller">Side Scroller</option>
-    <option value="superhero">Superhero</option>
-    <option value="permadeath">Permadeath</option>
+    {
+      categoryOptions.map((option) => (
+        <option selected={category === option.key} value={option.key}>
+          {option.text}
+        </option>
+      ))
+    }
   </Select>
   <Select name={QueryParams.SORTBY} label="Sort by:">
-    <option value="relevance">Relevance</option>
-    <option value="popularity">Popularity</option>
-    <option value="release-date">Release date</option>
-    <option value="alphabetical">Alphabetical</option>
+    {
+      sortByOptions.map((option) => (
+        <option selected={sortBy === option.key} value={option.key}>
+          {option.text}
+        </option>
+      ))
+    }
   </Select>
   <button
     type="submit"
